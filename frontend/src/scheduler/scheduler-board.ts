@@ -133,6 +133,14 @@ function removeScheduledItem(id: SchedulerItemId): void {
   appState.scheduledItems = appState.scheduledItems.filter((item) => item.id !== id);
 }
 
+function updateSchedulerPendingOverlay(): void {
+  const layout = document.querySelector<HTMLElement>(".scheduler-layout");
+  const overlay = document.querySelector<HTMLElement>("#scheduler_pending_overlay");
+
+  layout?.classList.toggle("scheduler-layout--ai-pending", schedulerAiPendingMode);
+  overlay?.setAttribute("aria-hidden", schedulerAiPendingMode ? "false" : "true");
+}
+
 function configureScheduler(): void {
   scheduler.plugins({
     timeline: true,
@@ -294,11 +302,13 @@ export function setSchedulerPreviewMode(active: boolean): void {
   schedulerPreviewMode = active;
   schedulerAiPendingMode = false;
   scheduler.config.readonly = active;
+  updateSchedulerPendingOverlay();
 }
 
 export function setSchedulerReadOnly(active: boolean): void {
   schedulerAiPendingMode = active && !schedulerPreviewMode;
   scheduler.config.readonly = active;
+  updateSchedulerPendingOverlay();
 }
 
 export function getDropTarget(event: DragEvent): { startDate: Date; resourceId: string } | null {

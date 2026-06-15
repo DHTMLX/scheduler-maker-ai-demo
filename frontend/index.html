@@ -34,6 +34,15 @@
               class="scheduler-container"
               aria-label="Maintenance staff work order timeline"
             ></div>
+            <div
+              id="scheduler_pending_overlay"
+              class="scheduler-pending-overlay"
+              aria-hidden="true"
+            >
+              <div class="scheduler-pending-overlay__status" role="status" aria-live="polite">
+                <span>Waiting for assistant</span><span class="scheduler-pending-overlay__dots" aria-hidden="true"></span>
+              </div>
+            </div>
           </section>
 
           <aside id="chat_panel" class="chat-panel" aria-label="AI facilities chat">
