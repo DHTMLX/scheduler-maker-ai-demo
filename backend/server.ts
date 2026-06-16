@@ -33,8 +33,8 @@ import type {
 const app: Express = express();
 const httpServer: HttpServer = createServer(app);
 const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-  baseURL: process.env.OPENAI_BASE_URL,
+  apiKey: process.env.OPENAI_API_KEY?.trim(),
+  baseURL: process.env.OPENAI_BASE_URL?.trim(),
 });
 
 const io = new Server(httpServer, {
