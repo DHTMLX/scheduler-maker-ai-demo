@@ -30,10 +30,11 @@ jobs:
             -t ${{ secrets.DOCKER_REGISTRY_URL }}/${USERNAME}/scheduler-maker-backend:main \
             -f backend/Dockerfile .
           docker push ${{ secrets.DOCKER_REGISTRY_URL }}/${USERNAME}/scheduler-maker-backend:main
-
+      
       - name: Build and push frontend image
         run: |
           docker build \
+            --build-arg VITE_SOCKET_URL=${{ secrets.VITE_SOCKET_URL }} \
             -t ${{ secrets.DOCKER_REGISTRY_URL }}/${USERNAME}/scheduler-maker-frontend:main \
             -f frontend/Dockerfile .
           docker push ${{ secrets.DOCKER_REGISTRY_URL }}/${USERNAME}/scheduler-maker-frontend:main
